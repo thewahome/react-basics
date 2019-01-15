@@ -4,7 +4,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar />
+        <Navbar title="React Basics" user="Charles Wahome" />
         <h1>My first React app</h1>
       </div>
     );
