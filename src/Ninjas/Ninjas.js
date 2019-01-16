@@ -1,27 +1,12 @@
 import React from 'react'
 
 const Ninjas = (props) => {
-    const { ninjas } = props
-    /*     
-        // uses the conditional approach
-
-
-        const ninjaList = ninjas.map(ninja => {
-        if (ninja.age > 20) {
-            return (
-                <div className="ninja" key={ninja.id}>
-                    <div>{ninja.name} - {ninja.belt} - {ninja.age}</div>
-                    <hr />
-                </div>
-            )
-        } else {
-            return null
-        }
-    }) */
+    const { ninjas, deleteNinja } = props
     const ninjaList = ninjas.map(ninja => {
         return ninja.age > 20 ? (
             <div className="ninja" key={ninja.id}>
                 <div>{ninja.name} - {ninja.belt} - {ninja.age}</div>
+                <button onClick={() => { deleteNinja(ninja.id) }}>Delete</button>
                 <hr />
             </div>
         ) : null
