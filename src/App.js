@@ -1,37 +1,32 @@
 import React, { Component } from 'react'
 import Navbar from './Navbar/Navbar'
 import Todos from './Todos/Todos'
+import EditTodos from './Todos/EditTodos'
 
 class App extends Component {
   state = {
-    ninjas: [
-      { name: 'Michelangelo', belt: 'Orange', id: 1, age: 20 },
-      { name: 'Leonardo', belt: 'Blue', id: 2, age: 21 },
-      { name: 'Raphael', belt: 'Red', id: 3, age: 23 },
-      { name: 'Donatello', belt: 'Purple', id: 4, age: 22 }
-    ],
     todos: [
       { id: 1, content: 'Finish videos' },
       { id: 2, content: 'Learn standards' },
       { id: 3, content: 'Design application' }
     ]
   }
-  addNinja = (ninja) => {
-    ninja.id = Math.random()
+  addTodo = (todo) => {
+    todo.id = Math.random()
     // create a copy of the array
-    // add new ninja to the list
+    // add new todo to the list
     // set it as the new array
-    let ninjas = [...this.state.ninjas, ninja] // spread operators = foreach 
+    let todos = [...this.state.todos, todo] // spread operators = foreach 
     this.setState({
-      ninjas: ninjas
+      todos: todos
     })
   }
-  deleteNinja = (id) => {
-    let ninjas = this.state.ninjas.filter(ninja => {
-      return ninja.id !== id
+  deleteTodo = (id) => {
+    let todos = this.state.todos.filter(todo => {
+      return todo.id !== id
     })
     this.setState({
-      ninjas: ninjas
+      todos: todos
     })
   }
   deleteTodo = (id) => {
@@ -48,6 +43,7 @@ class App extends Component {
         <Navbar title="React Basics" user="Charles Wahome" />
         <h1 className="blue-text">Todo List</h1>
         <Todos todos={this.state.todos} deleteTodo={this.deleteTodo}/>
+        <EditTodos addTodo={this.addTodo} />
       </div>
     );
   }

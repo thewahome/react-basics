@@ -5,7 +5,7 @@ export default function Todos({ todos, deleteTodo }) {
         todos.map(todo => {
             return (
                 <div className="collection-item">
-                    <span onClick={() => { deleteTodo(todo.id) }}>{todo.content}</span>
+                    <span id={todo.id} onClick={() => { deleteTodo(todo.id) }}>{todo.content}</span>
                 </div>
             )
         })
