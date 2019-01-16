@@ -11,13 +11,24 @@ class App extends Component {
       { name: 'Donatello', belt: 'Purple', id: 4, age: 22 }
     ]
   }
+  addNinja = (ninja) => {
+    ninja.id = Math.random()
+    // create a copy of the array
+    // add new ninja to the list
+    // set it as the new array
+    let ninjas = [...this.state.ninjas, ninja] // spread operators = foreach 
+    this.setState({
+      ninjas: ninjas
+    })
+    console.log(this.state.ninjas)
+  }
   render() {
     return (
       <div className="App">
         <Navbar title="React Basics" user="Charles Wahome" />
         <h1>Ninja Turtles</h1>
         <Ninjas ninjas={this.state.ninjas} />
-        <EditNinjas/>
+        <EditNinjas addNinja={this.addNinja} />
       </div>
     );
   }
