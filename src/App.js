@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Navbar from './Navbar/Navbar'
 import Ninjas from './Ninjas/Ninjas'
-
+import EditNinjas from './EditNinjas/EditNinjas'
 class App extends Component {
   state = {
     ninjas: [
@@ -17,6 +17,7 @@ class App extends Component {
         <Navbar title="React Basics" user="Charles Wahome" />
         <h1>Ninja Turtles</h1>
         <Ninjas ninjas={this.state.ninjas} />
+        <EditNinjas/>
       </div>
     );
   }
