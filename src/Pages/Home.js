@@ -1,6 +1,7 @@
 import React from 'react'
+import Rainbow from '../hoc/Rainbow'
 
-export default function Home() {
+const Home = () => {
     return (
         <div className="container">
             <h4 className="center">Home</h4>
@@ -8,3 +9,5 @@ export default function Home() {
         </div>
     )
 }
+
+export default Rainbow(Home)
