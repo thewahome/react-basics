@@ -5,6 +5,7 @@ import Navbar from './Navbar/Navbar'
 import Home from './Pages/Home'
 import About from './Pages/About'
 import Blog from './Pages/Blog'
+import BlogPost from './Pages/BlogPost'
 
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route path="/about" component={About} />
           <Route path="/blog" component={Blog} />
+          <Route path="/post/:id" component={BlogPost} />
         </div>
       </BrowserRouter>
     );
