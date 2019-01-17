@@ -4,7 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import Navbar from './Navbar/Navbar'
 import Home from './Pages/Home'
 import About from './Pages/About'
-import Contact from './Pages/Contact'
+import Blog from './Pages/Blog'
 
 class App extends Component {
   render() {
@@ -14,7 +14,7 @@ class App extends Component {
           <Navbar />
           <Route exact path="/" component={Home} />
           <Route path="/about" component={About} />
-          <Route path="/contact" component={Contact} />
+          <Route path="/blog" component={Blog} />
         </div>
       </BrowserRouter>
     );
