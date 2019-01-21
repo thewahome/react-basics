@@ -12,3 +12,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.blog .post img{
+  position: absolute;
+  top: 20px;
+  opacity: .6;
+  left:-100px;
+}
+.blog .post{
+  overflow: hidden;
+  padding-left: 80px;
+}
+.blog .card-title{
+  text-transform: capitalize;
+}
