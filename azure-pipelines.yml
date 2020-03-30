@@ -26,10 +26,6 @@ steps:
     displayName: 'npm install'
 
   - script: |
-      npm test -- --coverage
-    displayName: 'Runs tests'
-
-  - script: |
       npm run build
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/dev'))
     displayName: 'Build staging assets'
