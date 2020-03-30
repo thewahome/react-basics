@@ -37,46 +37,9 @@ steps:
     displayName: Set tag to env variable githubTag
     failOnStderr: true
 
-  # - script: |
-  #     dotnet publish ./src/server/ --configuration $(buildConfiguration) --output $BUILD_ARTIFACTSTAGINGDIRECTORY/win_x64 --self-contained true -r win-x64
-  #   failOnStderr: true
-  #   displayName: Build Win x64
-
-  # - script: |
-  #     dotnet publish ./src/server/ --configuration $(buildConfiguration) --output $BUILD_ARTIFACTSTAGINGDIRECTORY/linux_x64 --self-contained true -r linux-x64
-  #   failOnStderr: true
-  #   displayName: Build Linux x64
-
   - task: PublishBuildArtifacts@1
-    inputs:
-      pathtoPublish: '$(Build.ArtifactStagingDirectory)/win_x64'
-      artifactName: 'win_x64'
-    displayName: Publish Win x64 artifacts
-
-  - task: PublishBuildArtifacts@1
-    inputs:
-      pathtoPublish: '$(Build.ArtifactStagingDirectory)/linux_x64'
-      artifactName: 'linux_x64'
-    displayName: Publish Linux x64 artifacts
-
-  - task: ArchiveFiles@2
-    displayName: Zip Win x64 artifacts
-    condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/v')
-    inputs:
-      rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/win_x64'
-      archiveType: 'zip'
-      archiveFile: '$(Build.ArtifactStagingDirectory)/react-basics.zip'
-      replaceExistingArchive: true
-
-  - task: ArchiveFiles@2
-    displayName: Tar Linux x64 artifacts
-    condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/v')
-    inputs:
-      rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/linux_x64'
-      archiveType: 'tar'
-      tarCompression: 'gz'
-      archiveFile: '$(Build.ArtifactStagingDirectory)/react-basics.tar.gz'
-      replaceExistingArchive: true
+  inputs:
+    PathtoPublish: '$(System.DefaultWorkingDirectory)'
 
   - task: GithubRelease@0
     displayName: 'Attach Linux x64 artifacts to GitHub Release'
