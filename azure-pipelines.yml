@@ -56,7 +56,7 @@ steps:
       gitHubConnection: thewahome-github-connection
       repositoryName: thewahome/react-basics
       tagSource: manual
-      isDraft: true
+      isPreRelease: true
       tag: $(Build.BuildNumber)      
       assets: |
         $(Build.ArtifactStagingDirectory)/*.zip
