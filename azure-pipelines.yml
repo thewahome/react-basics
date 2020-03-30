@@ -30,14 +30,18 @@ steps:
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/dev'))
     displayName: 'Build staging assets'
 
-  - task: CopyFiles@2
-    displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
-    inputs:
-      SourceFolder: '$(System.DefaultWorkingDirectory)/build'
-      TargetFolder: '$(Build.ArtifactStagingDirectory)'
-
   - task: PublishBuildArtifacts@1
-    displayName: 'Publish Artifact: drop'
+    inputs:
+      pathtoPublish: '$(Build.ArtifactStagingDirectory)/build' 
+
+  # - task: CopyFiles@2
+  #   displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+  #   inputs:
+  #     SourceFolder: '$(System.DefaultWorkingDirectory)/build'
+  #     TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+  # - task: PublishBuildArtifacts@1
+  #   displayName: 'Publish Artifact: drop'
 
   # - task: GithubRelease@0
   #   displayName: 'Attach Linux x64 artifacts to GitHub Release'
