@@ -13,7 +13,7 @@ trigger:
     - v*
 
 pool:
-  vmImage: 'vs2017-win2016'
+  vmImage: 'ubuntu-latest' 
 
 steps:
   - task: NodeTool@0
