@@ -30,39 +30,37 @@ steps:
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/dev'))
     displayName: 'Build staging assets'
 
-  - script: |
-      export githubTag=$(git describe --abbrev=0 --tags)
-      echo "##vso[task.setvariable variable=githubTag]$githubTag"
-    condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/v')
-    displayName: Set tag to env variable githubTag
-    failOnStderr: true
+  - task: CopyFiles@2
+    displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+    inputs:
+      SourceFolder: '$(System.DefaultWorkingDirectory)/build'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
   - task: PublishBuildArtifacts@1
-    inputs:
-      PathtoPublish: '$(System.DefaultWorkingDirectory)/react-basics.zip'
+    displayName: 'Publish Artifact: drop'
 
-  - task: GithubRelease@0
-    displayName: 'Attach Linux x64 artifacts to GitHub Release'
-    condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/v')
-    inputs:
-      gitHubConnection: thewahome-github-connection
-      repositoryName: Thewahome/react-basics
-      assets: '$(Build.ArtifactStagingDirectory)/react-basics.tar.gz'
-      action: edit
-      target: '$(Build.SourceVersion)'
-      tag: '$(githubTag)'
-      addChangeLog: false
-      assetUploadMode: replace
+  # - task: GithubRelease@0
+  #   displayName: 'Attach Linux x64 artifacts to GitHub Release'
+  #   condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/v')
+  #   inputs:
+  #     gitHubConnection: thewahome-github-connection
+  #     repositoryName: Thewahome/react-basics
+  #     assets: '$(Build.ArtifactStagingDirectory)/react-basics.tar.gz'
+  #     action: edit
+  #     target: '$(Build.SourceVersion)'
+  #     tag: '$(githubTag)'
+  #     addChangeLog: false
+  #     assetUploadMode: replace
 
-  - task: GithubRelease@0
-    displayName: 'Attach Win x64 artifacts to GitHub Release'
-    condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/v')
-    inputs:
-      gitHubConnection: thewahome-github-connection
-      repositoryName: Thewahome/react-basics
-      assets: $(Build.ArtifactStagingDirectory)/react-basics.zip
-      action: edit
-      target: '$(Build.SourceVersion)'
-      tag: $(githubTag)
-      addChangeLog: true
-      assetUploadMode: replace
+  # - task: GithubRelease@0
+  #   displayName: 'Attach Win x64 artifacts to GitHub Release'
+  #   condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/v')
+  #   inputs:
+  #     gitHubConnection: thewahome-github-connection
+  #     repositoryName: Thewahome/react-basics
+  #     assets: $(Build.ArtifactStagingDirectory)/react-basics.zip
+  #     action: edit
+  #     target: '$(Build.SourceVersion)'
+  #     tag: $(githubTag)
+  #     addChangeLog: true
+  #     assetUploadMode: replace
