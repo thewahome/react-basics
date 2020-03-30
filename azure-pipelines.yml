@@ -26,10 +26,6 @@ steps:
     displayName: 'npm install'
 
   - script: |
-      npm run lint
-    displayName: 'Runs linting checks'
-
-  - script: |
       npm test -- --coverage
     displayName: 'Runs tests'
 
