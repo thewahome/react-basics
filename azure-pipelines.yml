@@ -30,6 +30,12 @@ steps:
     # condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/dev'))
     displayName: 'Build staging assets'
 
+  - task: CopyFiles@2
+    displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+    inputs:
+      SourceFolder: '$(System.DefaultWorkingDirectory)/build'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
   - task: GithubRelease@0
     displayName: 'Create GitHub Release'      
     inputs:
@@ -38,8 +44,7 @@ steps:
       tagSource: manual
       tag: $(Build.BuildNumber)      
       assets: |
-        $(Build.ArtifactStagingDirectory)/*.js
-        $(Build.ArtifactStagingDirectory)/README.txt
+        $(Build.ArtifactStagingDirectory)/**
 
   # - task: CopyFiles@2
   #   inputs:
