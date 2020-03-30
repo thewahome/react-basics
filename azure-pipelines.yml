@@ -90,8 +90,8 @@ steps:
     displayName: 'Attach Linux x64 artifacts to GitHub Release'
     condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/v')
     inputs:
-      gitHubConnection: github.com_Thewahome
-      repositoryName: ThewahOme/react-basics
+      gitHubConnection: thewahome-github-connection
+      repositoryName: Thewahome/react-basics
       assets: '$(Build.ArtifactStagingDirectory)/react-basics.tar.gz'
       action: edit
       target: '$(Build.SourceVersion)'
@@ -103,8 +103,8 @@ steps:
     displayName: 'Attach Win x64 artifacts to GitHub Release'
     condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/v')
     inputs:
-      gitHubConnection: github.com_Thewahome
-      repositoryName: ThewahOme/react-basics
+      gitHubConnection: thewahome-github-connection
+      repositoryName: Thewahome/react-basics
       assets: $(Build.ArtifactStagingDirectory)/react-basics.zip
       action: edit
       target: '$(Build.SourceVersion)'
