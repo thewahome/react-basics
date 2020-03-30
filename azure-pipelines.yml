@@ -26,10 +26,6 @@ steps:
     displayName: 'npm install'
 
   - script: |
-      npm version patch
-    displayName: 'npm version patch'
-
-  - script: |
       npm run build
     # condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/dev'))
     displayName: 'build staging assets'
