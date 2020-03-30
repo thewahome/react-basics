@@ -45,7 +45,7 @@ steps:
       includeRootFolder: true 
       archiveType: 'zip' # Options: zip, 7z, tar, wim
       tarCompression: 'gz' # Optional. Options: gz, bz2, xz, none
-      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
+      archiveFile: '$(Build.ArtifactStagingDirectory)/react-basics-$(Build.BuildId).zip' 
       replaceExistingArchive: true 
       verbose: true # Optional
     #quiet: # Optional
@@ -56,6 +56,7 @@ steps:
       gitHubConnection: thewahome-github-connection
       repositoryName: thewahome/react-basics
       tagSource: manual
+      isDraft: true
       tag: $(Build.BuildNumber)      
       assets: |
         $(Build.ArtifactStagingDirectory)/*.zip
