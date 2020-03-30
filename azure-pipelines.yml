@@ -38,7 +38,7 @@ steps:
     failOnStderr: true
 
   - task: PublishBuildArtifacts@1
-  inputs:
+    inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)'
 
   - task: GithubRelease@0
