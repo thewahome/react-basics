@@ -30,9 +30,26 @@ steps:
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/dev'))
     displayName: 'Build staging assets'
 
+  - task: GithubRelease@0
+    displayName: 'Create GitHub Release'      
+    inputs:
+      gitHubConnection: thewahome-github-connection
+      repositoryName: thewahome/react-basics
+      tagSource: manual
+      tag: $(Build.BuildNumber)      
+      assets: |
+        $(Build.ArtifactStagingDirectory)/*.js
+        $(Build.ArtifactStagingDirectory)/README.txt
+
+  - task: CopyFiles@2
+    inputs:
+      contents: '_buildOutput/**'
+      targetFolder: $(Build.ArtifactStagingDirectory)
+  
   - task: PublishBuildArtifacts@1
     inputs:
-      pathtoPublish: '$(Build.ArtifactStagingDirectory)/build' 
+      pathToPublish: $(Build.ArtifactStagingDirectory)
+      artifactName: MyBuildOutputs
 
   # - task: CopyFiles@2
   #   displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
