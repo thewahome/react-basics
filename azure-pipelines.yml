@@ -35,6 +35,13 @@ steps:
       SourceFolder: '$(System.DefaultWorkingDirectory)/build'
       TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'current'
+      downloadType: 'single'
+      artifactName: 'react-basics-$(Build.BuildId)'
+      downloadPath: '$(System.ArtifactsDirectory)'
+
   # Archive files
   # Compress files into .7z, .tar.gz, or .zip
   - task: ArchiveFiles@2
