@@ -50,13 +50,6 @@ steps:
       verbose: true # Optional
     #quiet: # Optional
     
-  - task: DownloadBuildArtifacts@0
-    inputs:
-      buildType: 'current'
-      downloadType: 'single'
-      artifactName: 'react-basics-$(Build.BuildId)'
-      downloadPath: '$(System.ArtifactsDirectory)'
-
   - task: GithubRelease@0
     condition: startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')
     displayName: 'create gitHub release'      
