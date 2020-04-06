@@ -1,3 +1,3 @@
 function displayVersionNumber () {
-	return '1.0.0 curent';
+	return '1.6.1 curent';
 }
