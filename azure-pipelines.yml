@@ -29,11 +29,11 @@ steps:
       npm run build
     displayName: 'build staging assets'
 
-  # - task: CopyFiles@2
-  #   displayName: 'copy files to: $(Build.ArtifactStagingDirectory)'
-  #   inputs:
-  #     SourceFolder: '$(System.DefaultWorkingDirectory)/build'
-  #     TargetFolder: '$(Build.ArtifactStagingDirectory)'
+  - task: CopyFiles@2
+    displayName: 'copy files to: $(Build.ArtifactStagingDirectory)'
+    inputs:
+      SourceFolder: '$(System.DefaultWorkingDirectory)/build'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 
   # # Archive files
