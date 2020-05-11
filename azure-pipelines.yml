@@ -27,7 +27,7 @@ steps:
 
   - script: |
       npm run build
-    displayName: 'build staging assets'
+    displayName: 'build artifacts'
 
   - task: CopyFiles@2
     displayName: 'copy files to: $(Build.ArtifactStagingDirectory)'
