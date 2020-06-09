@@ -6,8 +6,8 @@
 trigger:
   branches:
     include:
-    - master
-    - release/*
+    #- master
+    #- release/*
   tags:
     include:
     - v*
