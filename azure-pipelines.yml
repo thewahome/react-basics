@@ -2,7 +2,7 @@
 # Build a Node.js project using the webpack CLI.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
+name: $(Build.SourceBranch)-$(date:yyyyMMdd)$(rev:.r)
 trigger:
   branches:
     include:
@@ -31,7 +31,7 @@ steps:
 
   - script: |
       npm run build
-    displayName: 'build artifacts from $(Build.SourceBranch)'
+    displayName: 'build artifacts'
 
   - task: CopyFiles@2
     displayName: 'copy files to: $(Build.ArtifactStagingDirectory)'
