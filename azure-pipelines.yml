@@ -26,6 +26,10 @@ steps:
     displayName: 'npm install'
 
   - script: |
+      npm version
+    displayName: 'bump up version'
+
+  - script: |
       npm run build
     displayName: 'build artifacts'
 
