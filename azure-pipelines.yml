@@ -27,6 +27,7 @@ steps:
     displayName: 'npm install'
 
   - task: PowerShell@2
+    displayName: 'set buildnumber'
     inputs:
       targetType: 'inline'
       script: |
@@ -36,11 +37,6 @@ steps:
         $buildNumber = $Env:BUILD_BUILDNUMBER;
         
         Write-Host "##vso[build.updatebuildnumber]$version.$buildNumber"
-
-  - script: |
-      npmVersionString=$(npm view reactbasics version) 
-      echo ##vso##vso[build.updatebuildnumber]$npmVersionString
-    displayName: 'set buildnumber'
 
   - script: |
       npm run build
