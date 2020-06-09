@@ -6,8 +6,8 @@
 trigger:
   branches:
     include:
-    #- master
-    #- release/*
+    - master
+    - release/*
   tags:
     include:
     - v*
@@ -31,7 +31,7 @@ steps:
 
   - script: |
       npm run build
-    displayName: 'build artifacts'
+    displayName: 'build artifacts from $(Build.SourceBranch)'
 
   - task: CopyFiles@2
     displayName: 'copy files to: $(Build.ArtifactStagingDirectory)'
