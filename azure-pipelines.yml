@@ -30,9 +30,12 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        # Write your PowerShell commands here.
+        $lernaPath = "$Env:BUILD_SOURCESDIRECTORY\package.json"
+        $json = Get-Content "$lernaPath" | Out-String | ConvertFrom-Json
+        $version = $json.version
+        $buildNumber = $Env:BUILD_BUILDNUMBER;
         
-        Write-Host "Hello World"
+        Write-Host "##vso[build.updatebuildnumber]$version.$buildNumber"
 
   - script: |
       npmVersionString=$(npm view reactbasics version) 
