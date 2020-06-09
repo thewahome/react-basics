@@ -1,6 +1,6 @@
 {
   "name": "reactbasics",
-  "version": "6.0.2",
+  "version": "6.0.3",
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
