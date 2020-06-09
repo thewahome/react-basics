@@ -26,6 +26,11 @@ steps:
     displayName: 'npm install'
 
   - script: |
+      npmVersionString=$(npm view reactbasics version) 
+      echo ##vso##vso[build.updatebuildnumber]$npmVersionString
+    displayName: 'set buildnumber'
+
+  - script: |
       npm run build
     displayName: 'build artifacts'
 
