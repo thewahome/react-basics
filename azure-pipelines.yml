@@ -36,7 +36,7 @@ steps:
         $version = $json.version
         $buildNumber = $Env:BUILD_BUILDNUMBER;
         
-        Write-Host "##vso[build.updateversionnumber]$version"
+        Write-Host "##vso[task.setvariable variable=versionNumber]$version"
 
   - script: |
       npm run build
