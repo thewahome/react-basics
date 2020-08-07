@@ -33,9 +33,10 @@ steps:
       script: |
         $lernaPath = "$Env:BUILD_SOURCESDIRECTORY\package.json"
         $json = Get-Content "$lernaPath" | Out-String | ConvertFrom-Json
-        $version = $json.version;
+        $versionNumber = $json.version;
         
-        Write-Host "##vso[build.updatebuildnumber]$version"
+        Write-Host "Setting the build number variable to '$versionNumber'."
+        Write-Host "##vso[build.updatebuildnumber]$versionNumber"
 
   - script: |
       npm run build
