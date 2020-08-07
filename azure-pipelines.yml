@@ -33,8 +33,7 @@ steps:
       script: |
         $lernaPath = "$Env:BUILD_SOURCESDIRECTORY\package.json"
         $json = Get-Content "$lernaPath" | Out-String | ConvertFrom-Json
-        $version = $json.version
-        $buildNumber = $Env:BUILD_BUILDNUMBER;
+        $version = $json.version;
         
         Write-Host "##vso[build.updatebuildnumber]$version"
 
