@@ -4,10 +4,8 @@ on:
   push:
     branches:
       - feature/**
-  # pull_request:
-  #   types: [opened, synchronize, reopened, closed]
-  #   branches:
-  #     - master
+    branches-ignore:
+      - 'master'
 
 jobs:
   build_and_deploy_job:
