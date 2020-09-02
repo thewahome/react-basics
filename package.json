@@ -29,6 +29,13 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "standard-version": "^8.0.0"
+    "standard-version": "^8.0.2"
+  },
+  "standard-version": {
+    "skip": {
+      "changelog": true,
+      "commit": false,
+      "tag": false
+    }
   }
 }
