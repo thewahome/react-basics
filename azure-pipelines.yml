@@ -3,7 +3,6 @@
 # Build a Node.js project using the webpack CLI.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-name: $(Build.SourceBranch)-$(date:yyyyMMdd)$(rev:.r)
 trigger:
   branches:
     include:
@@ -14,7 +13,7 @@ trigger:
     - v*
 
 pool:
-  vmImage: 'ubuntu-latest' 
+  vmImage: 'ubuntu-latest'
 
 steps:
   - task: NodeTool@0
@@ -27,16 +26,16 @@ steps:
     displayName: 'npm install'
 
   - task: PowerShell@2
-    displayName: 'set buildnumber'
+    displayName: 'set versionnumber'
     inputs:
       targetType: 'inline'
       script: |
         $lernaPath = "$Env:BUILD_SOURCESDIRECTORY\package.json"
         $json = Get-Content "$lernaPath" | Out-String | ConvertFrom-Json
-        $version = $json.version
-        $buildNumber = $Env:BUILD_BUILDNUMBER;
-        
-        Write-Host "##vso[build.updatebuildnumber]$version"
+        $versionNumber = $json.version;
+
+        Write-Host "Setting the build number variable to '$versionNumber'."
+        Write-Host "##vso[build.updatebuildnumber]$versionNumber"
 
   - script: |
       npm run build
