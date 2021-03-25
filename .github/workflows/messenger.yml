@@ -36,4 +36,4 @@ jobs:
           text: Message Text
           theme_color: blue
           sections: '[{ "activityTitle": "Release assets" }]'
-          actions: '[{ "@type": "OpenUri", "name": "lorem ipsum", "targets": [{ "os": "default", "uri": ${{ github.event.release.html_url }} }] }]'
+          actions: '[{ "@type": "OpenUri", "name": "lorem ipsum", "targets": [{ "os": "default", "uri": "${{ github.event.release.html_url }}" }] }]'
