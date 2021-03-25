@@ -35,5 +35,5 @@ jobs:
           summary: A new release (${{ github.event.release.tag_name }}) has been created by ${{ github.event.release.author.login }}
           text: Message Text
           theme_color: blue
-          sections: '[{ "activityTitle": "Release assets" }, "activitySubtitle", ${{ github.event.release.assets_url }}]'
+          sections: '[{ "activityTitle": "Release assets" }, "activitySubtitle": ${{ github.event.release.assets_url }}]'
           actions: '[{ "@type": "OpenUri", "name": "lorem ipsum", "targets": [{ "os": "default", "uri": ${{ github.event.release.html_url }} }] }]'
