@@ -1,8 +1,12 @@
 name: Message Sender
 
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - 'master'
+# on:
+#   release:
+#     types: [published]
 
 jobs:
   send_message_job:
@@ -10,6 +14,13 @@ jobs:
     runs-on: ubuntu-latest
     name: Send a message to Microsoft Teams
     steps:
+      - uses: actions/checkout@v2
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: Test
+        run: |
+          echo $RELEASE_VERSION
+          echo ${{ env.RELEASE_VERSION }}
       - name: tag number
         run : echo ${{ github.event.release.tag_name }}
       - name: Send a message to Microsoft Teams
