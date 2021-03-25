@@ -21,19 +21,18 @@ jobs:
       - name: Check output
         env:
           RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
-          GIT_CONTEXT: ${{ toJson(github) }}
+          GIT_CONTEXT: ${{ toJson(github.event.release) }}
           CREATED: ${{ github.event.release.created_at }}
         run: |
           echo $RELEASE_VERSION
           echo $GIT_CONTEXT
-          echo ${{ steps.vars.outputs.tag }}
           echo ${{ steps.vars.outputs.tag }}
       - name: Send a message to Microsoft Teams
         uses: aliencube/microsoft-teams-actions@v0.8.0
         with:
           webhook_uri: ${{ secrets.WEBHOOK_URL}}
           title: Message ${{ github.event.release.tag_name }}
-          summary: Message Summary ($RELEASE_VERSION)
+          summary: Message Summary for (${{steps.vars.outputs.tag}})
           text: Message Text
           theme_color: blue
           sections: '[{ "activityTitle": "hello world" }]'
