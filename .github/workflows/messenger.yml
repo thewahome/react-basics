@@ -15,20 +15,21 @@ jobs:
     name: Send a message to Microsoft Teams
     steps:
       - uses: actions/checkout@v2
-      - name: Set env
-        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-      - name: Test
+      - name: Set output
+        id: vars
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+      - name: Check output
+        env:
+          RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
         run: |
           echo $RELEASE_VERSION
-          echo ${{ env.RELEASE_VERSION }}
-      - name: tag number
-        run : echo ${{ github.event.release.tag_name }}
+          echo ${{ steps.vars.outputs.tag }}
       - name: Send a message to Microsoft Teams
         uses: aliencube/microsoft-teams-actions@v0.8.0
         with:
           webhook_uri: ${{ secrets.WEBHOOK_URL}}
           title: Message ${{ github.event.release.tag_name }}
-          summary: Message Summary
+          summary: Message Summary ($RELEASE_VERSION)
           text: Message Text
           theme_color: blue
           sections: '[{ "activityTitle": "hello world" }]'
