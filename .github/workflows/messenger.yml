@@ -3,10 +3,7 @@ name: Message Sender
 on:
   push:
     branches:
-      - feature/**
-    branches-ignore:
-      - 'master'
-      - 'develop'
+      - master
 
 steps:
   name: Send a message to Microsoft Teams
