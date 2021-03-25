@@ -19,5 +19,5 @@ jobs:
           summary: Message Summary
           text: Message Text
           theme_color: blue
-          sections: '[{ "activityTitle": "hello world" }, { ... }]'
-          actions: '[{ "@type": "OpenUri", "name": "lorem ipsum", "targets": [{ "os": "default", "uri": "https://localhost" }] }, { ... }]'
+          sections: '[{ "activityTitle": "hello world" }]'
+          actions: '[{ "@type": "OpenUri", "name": "lorem ipsum", "targets": [{ "os": "default", "uri": "https://localhost" }] }]'
