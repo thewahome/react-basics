@@ -8,6 +8,7 @@ on:
 jobs:
   send_message_job:
     #if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    runs-on: ubuntu-latest
     name: Send a message to Microsoft Teams
     steps:
       - name: Send a message to Microsoft Teams
