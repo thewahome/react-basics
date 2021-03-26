@@ -17,6 +17,6 @@ jobs:
           title: New release ${{ github.event.release.name }} from ${{ github.event.repository.name }}
           summary: A new release (${{ github.event.release.tag_name }}) has been created by ${{ github.event.release.author.login }}
           text: ${{ github.event.release.body }}
-          theme_color: blue
-          sections: '[{ "activityTitle": "Created by ${{ github.event.release.author.login }}", "activitySubtitle": "Is draft? ${{ github.event.release.draft }}", "activityImage": "${{ github.event.release.author.avatar_url  }}" }]'
+          theme_color: 0000FF
+          # sections: '[{ "activityTitle": "Created by ${{ github.event.release.author.login }}", "activitySubtitle": "Is draft? ${{ github.event.release.draft }}", "activityImage": "${{ github.event.release.author.avatar_url  }}" }]'
           actions: '[{ "@type": "OpenUri", "name": "View release", "targets": [{ "os": "default", "uri": "${{ github.event.release.html_url }}" }]}, { "@type": "OpenUri", "name": "Download assets", "targets": [{ "os": "default", "uri": "${{ github.event.release.assets[0] }}"}]}]'
