@@ -16,6 +16,6 @@ jobs:
           webhook_uri: ${{ secrets.WEBHOOK_URL}}
           title: New release ${{ github.event.release.name }} from ${{ github.event.repository.name }}
           summary: A new release (${{ github.event.release.tag_name }}) has been created by ${{ github.event.release.author.login }}
-          text: ${{ github.event.release.body }}
+          text: ${{ github.event.release.body }} \r\n ${{ github.event.release.assets }} \r\n ${{ github.event.release.assets[0].browser_download_url }}
           theme_color: 0000FF
           actions: '[{ "@type": "OpenUri", "name": "View release", "targets": [{ "os": "default", "uri": "${{ github.event.release.html_url }}" }]}, { "@type": "OpenUri", "name": "Download ${{ github.event.release.assets[0].name }}", "targets": [{ "os": "default", "uri": "${{ github.event.release.assets[0].browser_download_url }}"}]}]'
