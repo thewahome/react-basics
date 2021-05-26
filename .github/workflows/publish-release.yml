@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Send a message to Microsoft Teams
     steps:
+      - uses: actions/checkout@v2
       - name: Send a message to Microsoft Teams
         uses: aliencube/microsoft-teams-actions@v0.8.0
         with:
@@ -17,4 +18,4 @@ jobs:
           summary: A new release (${{ github.event.release.tag_name }}) has been created
           text: ${{ github.event.release.body }}
           theme_color: 0000FF
-          actions: '[{ "@type": "OpenUri", "name": "View release", "targets": [{ "os": "default", "uri": "${{ github.event.release.html_url }}" }]}'
+          actions: '[{"@type": "OpenUri", "name": "View release", "targets": [{ "os": "default", "uri": "${{ github.event.release.html_url }}"}]}]'
