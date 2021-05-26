@@ -1,4 +1,4 @@
-name: Message Sender
+name: Publish release
 
 on:
   release:
@@ -18,5 +18,4 @@ jobs:
           summary: A new release (${{ github.event.release.tag_name }}) has been created by ${{ github.event.release.author.login }}
           text: ${{ github.event.release.body }}
           theme_color: 0000FF
-          # sections: '[{ "activityTitle": "Created by ${{ github.event.release.author.login }}", "activitySubtitle": "Is draft? ${{ github.event.release.draft }}", "activityImage": "${{ github.event.release.author.avatar_url  }}" }]'
-          actions: '[{ "@type": "OpenUri", "name": "View release", "targets": [{ "os": "default", "uri": "${{ github.event.release.html_url }}" }]}, { "@type": "OpenUri", "name": "Download assets", "targets": [{ "os": "default", "uri": "${{ github.event.release.assets[0].browser_download_url }}"}]}]'
+          actions: '[{ "@type": "OpenUri", "name": "View release", "targets": [{ "os": "default", "uri": "${{ github.event.release.html_url }}" }]}, { "@type": "OpenUri", "name": "Download ${{ github.event.release.assets[0].name }}", "targets": [{ "os": "default", "uri": "${{ github.event.release.assets[0].browser_download_url }}"}]}]'
