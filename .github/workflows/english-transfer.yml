@@ -1,0 +1,22 @@
+name: English File transfer
+
+on: push
+
+jobs:
+  copy-file:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Pushes test file
+      uses: dmnemec/copy_file_to_another_repo_action@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      with:
+        source_file: 'src/messages/GE.json'
+        destination_repo: 'thewahome/building-react-apps'
+        destination_folder: 'messages'
+        user_email: 'thewahome.cw@gmail.com'
+        user_name: 'thewahome'
+        commit_message: 'Update english file'
