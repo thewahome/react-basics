@@ -14,7 +14,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Pushes test file
+    - name: Pushes English file
       uses: dmnemec/copy_file_to_another_repo_action@main
       env:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
@@ -23,6 +23,6 @@ jobs:
         destination_repo: 'thewahome/building-react-apps'
         destination_folder: 'messages'
         destination_branch: 'master'
-        user_email: 'thewahome.cw@gmail.com'
-        user_name: 'thewahome'
+        user_email: ${{ secrets.ACTION_EMAIL }}
+        user_name: ${{ secrets.ACTION_USERNAME }}
         commit_message: 'Update english file'
