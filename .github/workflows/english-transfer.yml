@@ -17,6 +17,7 @@ jobs:
         source_file: 'src/messages/GE.json'
         destination_repo: 'thewahome/building-react-apps'
         destination_folder: 'messages'
+        destination_branch: 'master'
         user_email: 'thewahome.cw@gmail.com'
         user_name: 'thewahome'
         commit_message: 'Update english file'
