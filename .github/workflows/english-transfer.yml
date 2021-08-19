@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - 'messages/**'
+      - 'src/messages/**'
 
 jobs:
   copy-file:
