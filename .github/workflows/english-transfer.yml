@@ -1,6 +1,11 @@
 name: English File transfer
 
-on: push
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'messages/**'
 
 jobs:
   copy-file:
