@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - 'src/messages/**'
+      - '**GE.json'
 
 jobs:
   copy-file:
@@ -25,4 +25,4 @@ jobs:
         destination_branch: 'master'
         user_email: ${{ secrets.ACTION_EMAIL }}
         user_name: ${{ secrets.ACTION_USERNAME }}
-        commit_message: 'Update english file'
+        commit_message: 'This pull request was automatically created by GitHub Action `${{ github.workflow }}`. \n\n The action runs against the latest changes merged to `${{ github.ref }}`.'
