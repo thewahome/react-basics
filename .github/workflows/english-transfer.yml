@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - '**GE.json'
+      - 'src/messages/GE.json'
 
 jobs:
   copy-file:
