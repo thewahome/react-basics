@@ -14,6 +14,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Set current date as env variable
+      run: echo "::set-output name=today::$(date +'%Y-%m-%d')"
+
     - name: Pushes English file
       uses: dmnemec/copy_file_to_another_repo_action@main
       env:
@@ -25,4 +28,4 @@ jobs:
         destination_branch: 'master'
         user_email: ${{ secrets.ACTION_EMAIL }}
         user_name: ${{ secrets.ACTION_USERNAME }}
-        commit_message: 'English file transfer'
+        commit_message: ${{ steps.date.outputs.today }} English file transfer
