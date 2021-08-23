@@ -17,7 +17,7 @@ jobs:
     - name: Pushes English file
       uses: dmnemec/copy_file_to_another_repo_action@main
       env:
-        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
       with:
         source_file: 'src/messages/GE.json'
         destination_repo: 'thewahome/building-react-apps'
