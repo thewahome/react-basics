@@ -24,7 +24,7 @@ jobs:
       with:
         source_file: 'src/messages/GE.json'
         destination_repo: 'thewahome/building-react-apps'
-        destination_folder: 'ge-content'
+        destination_folder: 'messages'
         destination_branch: 'master'
         user_email: ${{ secrets.ACTION_EMAIL }}
         user_name: ${{ secrets.ACTION_USERNAME }}
