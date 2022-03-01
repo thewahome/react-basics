@@ -7,7 +7,7 @@ on:
         required: true
 jobs:
   cut-release:
-    name: Create release branch and PRs into develop/master
+    name: Creates release branch and PRs into develop/master
     runs-on: ubuntu-latest
     steps:
       - name: Exit if release type argument is invalid
