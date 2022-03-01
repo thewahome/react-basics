@@ -34,7 +34,6 @@ jobs:
         env:
           RELEASE_TYPE: ${{ github.event.inputs.release-type }}
         run: |
-          git pull --force
           current_version=$( jq -r '.version' < package.json )
           echo "Current version is $current_version"
 
@@ -81,7 +80,7 @@ jobs:
           source_branch: ${{ steps.create-release.outputs.branch_name }}
           destination_branch: "develop"
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          pr_title: ${{ steps.create-release.outputs.branch_name }}
+          pr_title: "Chore: Update to ${{ env.NEW_VERSION }}"
           pr_body: ${{ env.develop_pr_body }}
 
       - name: Create pull request into master
@@ -90,5 +89,5 @@ jobs:
           source_branch: ${{ steps.create-release.outputs.branch_name }}
           destination_branch: "master"
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          pr_title: "Chore: Release ${{ env.NEW_VERSION }}"
+          pr_title: "Chore (release): ${{ env.NEW_VERSION }}"
           pr_body: ${{ env.master_pr_body }}
