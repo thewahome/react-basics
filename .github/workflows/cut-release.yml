@@ -8,9 +8,6 @@ on:
 jobs:
   cut-release:
     name: Creates release branch and PRs into develop/master
-    defaults:
-      run:
-        working-directory: ./
 
     runs-on: ubuntu-latest
     steps:
@@ -33,7 +30,12 @@ jobs:
       - name: Display version number
         id: get-versionnumber
         run: |
-          PACKAGE_VERSION=$(node -p "require('package.json').version")
+          PACKAGE_VERSION=$(cat package.json \
+          | grep version \
+          | head -1 \
+          | awk -F: '{ print $2 }' \
+          | sed 's/[",]//g')
+
           echo $PACKAGE_VERSION
 
       - name: Create release branch and generate PR body
