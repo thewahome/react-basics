@@ -29,7 +29,7 @@ jobs:
       - name: Display version number
         id: get-versionnumber
         run: |
-          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          PACKAGE_VERSION=$(node -p "require('package.json').version")
           echo $PACKAGE_VERSION
 
       - name: Create release branch and generate PR body
