@@ -10,8 +10,7 @@ jobs:
     name: Creates release branch and PRs into develop/master
 
     runs-on: ubuntu-latest
-    env:
-      working-directory: .
+
     steps:
       - name: Exit if release type argument is invalid
         run: exit 1
@@ -31,7 +30,7 @@ jobs:
 
       - name: List folders
         id: list-folders
-        run: ls R
+        run: ls
 
       - name: Display version number
         id: get-versionnumber
