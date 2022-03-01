@@ -31,7 +31,8 @@ jobs:
         env:
           RELEASE_TYPE: ${{ github.event.inputs.release-type }}
         run: |
-          current_version=$(jq -r .version package.json)
+          current_version=$(jq -r .version ./../package.json)
+          echo "Current version is $current_version"
 
           npm version $RELEASE_TYPE --git-tag-version false
           new_version=$(jq -r .version package.json)
@@ -39,7 +40,6 @@ jobs:
 
           branch_name="release/${new_version}"
 
-          echo "Current version is $current_version"
           echo "New version is $new_version"
           echo "New branch name is $branch_name"
 
