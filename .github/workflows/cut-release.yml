@@ -1,0 +1,89 @@
+name: Cut Release
+on:
+  workflow_dispatch:
+    inputs:
+      release-type:
+        description: Release type (major/minor/patch)
+        required: true
+jobs:
+  cut-release:
+    name: Create release branch and PRs into develop/master
+    runs-on: ubuntu-latest
+    steps:
+      - name: Exit if release type argument is invalid
+        run: exit 1
+        if: ${{ github.event.inputs.release-type != 'major' && github.event.inputs.release-type != 'minor' && github.event.inputs.release-type != 'patch' }}
+
+      - name: Checkout develop for ${{ github.event.inputs.release-type }} release
+        uses: actions/checkout@v2
+        if: ${{ github.event.inputs.release-type == 'major' || github.event.inputs.release-type == 'minor' }}
+        with:
+          ref: develop
+
+      - name: Checkout master for ${{ github.event.inputs.release-type }} release
+        uses: actions/checkout@v2
+        if: ${{ github.event.inputs.release-type == 'patch' }}
+        with:
+          ref: master
+
+      - name: Create release branch and generate PR body
+        id: create-release
+        env:
+          RELEASE_TYPE: ${{ github.event.inputs.release-type }}
+        run: |
+          current_version=$(jq -r .version package.json)
+
+          npm version $RELEASE_TYPE --git-tag-version false
+          new_version=$(jq -r .version package.json)
+          git reset --hard
+
+          branch_name="release/${new_version}"
+
+          echo "Current version is $current_version"
+          echo "New version is $new_version"
+          echo "New branch name is $branch_name"
+
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+          git checkout -b "$branch_name"
+
+          npm version $RELEASE_TYPE --git-tag-version false
+
+          git commit -a -m "Bump version to ${new_version}"
+          git push --set-upstream origin "$branch_name"
+
+          # Use --depth to get commits to add to rev-list
+          git fetch origin master --depth 100
+          git fetch origin develop --depth 100
+
+          master_pr_body=$(git rev-list --oneline $branch_name ^origin/master)
+          develop_pr_body=$(git rev-list --oneline $branch_name ^origin/develop)
+
+          echo 'master_pr_body<<END_OF_OUTPUT' >> $GITHUB_ENV
+          echo "$master_pr_body" >> $GITHUB_ENV
+          echo 'END_OF_OUTPUT' >> $GITHUB_ENV
+
+          echo 'develop_pr_body<<END_OF_OUTPUT' >> $GITHUB_ENV
+          echo "$develop_pr_body" >> $GITHUB_ENV
+          echo 'END_OF_OUTPUT' >> $GITHUB_ENV
+
+          echo "::set-output name=branch_name::$branch_name"
+
+      - name: Create pull request into develop
+        uses: repo-sync/pull-request@v2
+        with:
+          source_branch: ${{ steps.create-release.outputs.branch_name }}
+          destination_branch: "develop"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_title: ${{ steps.create-release.outputs.branch_name }}
+          pr_body: ${{ env.develop_pr_body }}
+
+      - name: Create pull request into master
+        uses: repo-sync/pull-request@v2
+        with:
+          source_branch: ${{ steps.create-release.outputs.branch_name }}
+          destination_branch: "master"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_title: ${{ steps.create-release.outputs.branch_name }}
+          pr_body: ${{ env.master_pr_body }}
