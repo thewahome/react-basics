@@ -29,6 +29,10 @@ jobs:
         with:
           ref: master
 
+      - name: List folders
+        id: list-folders
+        run: ls R
+
       - name: Display version number
         id: get-versionnumber
         run: |
