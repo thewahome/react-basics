@@ -71,7 +71,10 @@ jobs:
           echo "$develop_pr_body" >> $GITHUB_ENV
           echo 'END_OF_OUTPUT' >> $GITHUB_ENV
 
+          echo 'master_pr_body<<END_OF_OUTPUT' >> $GITHUB_ENV
+
           echo "::set-output name=branch_name::$branch_name"
+          echo "::set-output name=new_version::$new_version"
 
       - name: Create pull request into develop
         uses: repo-sync/pull-request@v2
@@ -88,5 +91,5 @@ jobs:
           source_branch: ${{ steps.create-release.outputs.branch_name }}
           destination_branch: "master"
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          pr_title: "Chore: Release $current_version"
+          pr_title: "Chore: Release ${{ steps.create-release.outputs.new_version }}"
           pr_body: ${{ env.master_pr_body }}
