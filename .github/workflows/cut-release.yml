@@ -73,6 +73,7 @@ jobs:
           echo 'END_OF_OUTPUT' >> $GITHUB_ENV
 
           echo 'master_pr_body<<END_OF_OUTPUT' >> $GITHUB_ENV
+          echo "NEW_VERSION=${new_version}" >> $GITHUB_ENV
 
           echo "::set-output name=branch_name::$branch_name"
           echo "::set-output name=new_version::$new_version"
@@ -92,5 +93,5 @@ jobs:
           source_branch: ${{ steps.create-release.outputs.branch_name }}
           destination_branch: "master"
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          pr_title: "Chore: Release ${{ steps.create-release.outputs.new_version }}"
+          pr_title: "Chore: Release ${{ env.NEW_VERSION }}"
           pr_body: ${{ env.master_pr_body }}
