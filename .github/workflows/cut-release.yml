@@ -29,9 +29,8 @@ jobs:
       - name: Display version number
         id: get-versionnumber
         run: |
-          # PACKAGE_VERSION=$(jq -r .version package.json)
-          # echo $PACKAGE_VERSION
-          echo "`jq '.version="bar"' package.json`" > package.json
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          echo $PACKAGE_VERSION
 
       - name: Create release branch and generate PR body
         id: create-release
