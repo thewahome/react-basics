@@ -10,6 +10,8 @@ jobs:
     name: Creates release branch and PRs into develop/master
 
     runs-on: ubuntu-latest
+    env:
+      working-directory: .
     steps:
       - name: Exit if release type argument is invalid
         run: exit 1
