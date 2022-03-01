@@ -76,7 +76,6 @@ jobs:
           echo "NEW_VERSION=${new_version}" >> $GITHUB_ENV
 
           echo "::set-output name=branch_name::$branch_name"
-          echo "::set-output name=new_version::$new_version"
 
       - name: Create pull request into develop
         uses: repo-sync/pull-request@v2
