@@ -29,15 +29,16 @@ jobs:
       - name: Display version number
         id: get-versionnumber
         run: |
-          PACKAGE_VERSION=$(sed -nr 's/^\s*\"version": "([0-9]{1,}\.[0-9]{1,}.*)",$/\1/p' package.json)
+          PACKAGE_VERSION=$(jq -r .version package.json)
           echo $PACKAGE_VERSION
+          echo "`jq '.version="bar"' package.json`" > package.json
 
       - name: Create release branch and generate PR body
         id: create-release
         env:
           RELEASE_TYPE: ${{ github.event.inputs.release-type }}
         run: |
-          current_version=$(jq -r .version ./../package.json)
+          current_version=$(jq -r .version package.json)
           echo "Current version is $current_version"
 
           npm version $RELEASE_TYPE --git-tag-version false
