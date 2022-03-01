@@ -26,6 +26,12 @@ jobs:
         with:
           ref: master
 
+      - name: Display version number
+        id: 'get versionnumber'
+        run: |
+          PACKAGE_VERSION=$(sed -nr 's/^\s*\"version": "([0-9]{1,}\.[0-9]{1,}.*)",$/\1/p' package.json)
+          echo $PACKAGE_VERSION
+
       - name: Create release branch and generate PR body
         id: create-release
         env:
