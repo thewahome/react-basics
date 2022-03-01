@@ -8,6 +8,10 @@ on:
 jobs:
   cut-release:
     name: Creates release branch and PRs into develop/master
+    defaults:
+      run:
+        working-directory: ./
+
     runs-on: ubuntu-latest
     steps:
       - name: Exit if release type argument is invalid
