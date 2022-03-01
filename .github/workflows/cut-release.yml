@@ -34,6 +34,7 @@ jobs:
         env:
           RELEASE_TYPE: ${{ github.event.inputs.release-type }}
         run: |
+          git pull --force
           current_version=$( jq -r '.version' < package.json )
           echo "Current version is $current_version"
 
